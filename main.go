@@ -574,6 +574,9 @@ func main() {
 		for _, groupHandler := range legacyMetricsGroup {
 			instrumenter.InitializeMetrics(prometheus.Labels{"group": groupHandler.group, "handler": groupHandler.handler})
 		}
+		for _, groupHandler := range logsGroup {
+			instrumenter.InitializeMetrics(prometheus.Labels{"group": groupHandler.group, "handler": groupHandler.handler})
+		}
 
 		var (
 			tenantIDs   = map[string]string{}
@@ -1732,4 +1735,9 @@ var metricsV1Group = []groupHandler{
 	{"metricsv1", "rules-raw"},
 	{"metricsv1", "alerts"},
 	{"metricsv1", "silences"},
+}
+
+var logsGroup = []groupHandler{
+	{"logsv1", "query"},
+	{"logsv1", "query_range"},
 }
